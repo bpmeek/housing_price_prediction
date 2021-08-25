@@ -25,19 +25,28 @@
 #
 # See the License for the specific language governing permissions and
 # limitations under the License.
+"""
+This is a boilerplate pipeline 'data_engineering'
+generated using Kedro 0.17.4
+"""
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import LabelEncoder
+import pandas as pd
+import numpy as np
 
-"""Project pipelines."""
 from typing import Dict
 
-from kedro.pipeline import Pipeline
-from .pipelines import data_engineering
+
+#TODO: Save label encoder for use in production
+def encoding(data: pd.DataFrame) -> pd.DataFrame:
+    struct_data = data.copy()
+    non_numeric_columns = list(struct_data.select_dtypes(exclude=[np.number]).columns)
+    le = LabelEncoder()
+    for col in non_numeric_columns:
+        struct_data[col] = le.fit_transform(struct_data[col])
+    return struct_data
 
 
-def register_pipelines() -> Dict[str, Pipeline]:
-    """Register the project's pipelines.
-
-    Returns:
-        A mapping from a pipeline name to a ``Pipeline`` object.
-    """
-    de_pipeline = data_engineering.create_pipeline()
-    return {"__default__": de_pipeline}
+def split_test_train(df: pd.DataFrame, test_size: float) -> Dict[str, any]:
+    train, test = train_test_split(df, test_size=test_size, random_state=42)
+    return dict(train=train, test=test)
