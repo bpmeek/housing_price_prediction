@@ -25,20 +25,9 @@
 #
 # See the License for the specific language governing permissions and
 # limitations under the License.
+"""
+This is a boilerplate pipeline 'data_science'
+generated using Kedro 0.17.4
+"""
 
-"""Project pipelines."""
-from typing import Dict
-
-from kedro.pipeline import Pipeline
-from .pipelines import data_engineering
-
-
-def register_pipelines() -> Dict[str, Pipeline]:
-    """Register the project's pipelines.
-
-    Returns:
-        A mapping from a pipeline name to a ``Pipeline`` object.
-    """
-    de_pipeline = data_engineering.create_pipeline()
-    return {"__default__": de_pipeline,
-            "de": de_pipeline}
+from causalnex.structure.notears import from_pandas

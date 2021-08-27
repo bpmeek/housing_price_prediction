@@ -26,19 +26,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Project pipelines."""
-from typing import Dict
+"""
+This is a boilerplate pipeline 'data_science'
+generated using Kedro 0.17.4
+"""
 
-from kedro.pipeline import Pipeline
-from .pipelines import data_engineering
+from kedro.pipeline import Pipeline, node
 
 
-def register_pipelines() -> Dict[str, Pipeline]:
-    """Register the project's pipelines.
-
-    Returns:
-        A mapping from a pipeline name to a ``Pipeline`` object.
-    """
-    de_pipeline = data_engineering.create_pipeline()
-    return {"__default__": de_pipeline,
-            "de": de_pipeline}
+def create_pipeline(**kwargs):
+    return Pipeline([])

@@ -12,3 +12,18 @@ test:
   type: pandas.CSVDataSet
   filepath: data/01_raw/test.csv
   layer: raw
+
+encoded_data:
+  type: pandas.CSVDataSet
+  filepath: data/02_intermediate/encoded_data.csv
+  layer: intermediate
+
+train_data:
+  type: pandas.CSVDataSet
+  filepath: data/03_primary/train.csv
+  layer: primary
+
+test_data:
+  type: pandas.CSVDataSet
+  filepath: data/03_primary/test.csv
+  layer: primary
